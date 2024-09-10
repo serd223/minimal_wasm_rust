@@ -20,11 +20,11 @@ const HEIGHT = 480;
   const imageDataPtr = allocateImage(WIDTH, HEIGHT);
 
   const frame = (time) => {
-    let delta = time - prevTime / 1000; // Millis to secs
+    let delta = (time - prevTime) / 1000; // Millis to secs
     prevTime = time;
     
     //logic
-    frameWasm(imageDataPtr, WIDTH, HEIGHT);
+    frameWasm(imageDataPtr, WIDTH, HEIGHT, delta);
     
     const data = new Uint8ClampedArray(wasmMemory.buffer, imageDataPtr, WIDTH * HEIGHT * 4);
     ctx.putImageData(new ImageData(data, WIDTH), 0, 0);  
