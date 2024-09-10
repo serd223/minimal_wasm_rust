@@ -13,12 +13,6 @@ const HEIGHT = 480;
   if (ctx === null) throw new Error("2D context is not supported");
   ctx.imageSmoothingEnabled = false;
 
-  const offscreenCanvas = new OffscreenCanvas(WIDTH, HEIGHT);
-  
-  const offscreenCtx = offscreenCanvas.getContext("2d");
-  if (offscreenCtx === null) throw new Error("2D context is not supported");
-  offscreenCtx.imageSmoothingEnabled = false;
-
   let prevTime = 0;
   let frameWasm = wasm.instance.exports.frame;
   let allocateImage = wasm.instance.exports.allocate_image;
@@ -33,9 +27,7 @@ const HEIGHT = 480;
     frameWasm(imageDataPtr, WIDTH, HEIGHT);
     
     const data = new Uint8ClampedArray(wasmMemory.buffer, imageDataPtr, WIDTH * HEIGHT * 4);
-    offscreenCtx.putImageData(new ImageData(data, WIDTH), 0, 0);
-    
-    ctx.drawImage(offscreenCtx.canvas, 0, 0, WIDTH, HEIGHT);
+    ctx.putImageData(new ImageData(data, WIDTH), 0, 0);  
     
     window.requestAnimationFrame(frame);
   };
