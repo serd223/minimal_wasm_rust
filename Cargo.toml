@@ -8,4 +8,4 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-framebrush = { git = "https://github.com/serd223/framebrush.git"}
+framebrush = { git = "https://github.com/serd223/framebrush.git", rev = "7b41386265d8908a1d1a1ccb723b4b47bac7141d"}
