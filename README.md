@@ -7,11 +7,10 @@ I had to borrow some code from him due to my inexperience with JavaScript/TypeSc
 
 # Building
 
-Run build.bat (build.sh if you're on Linux) and then start a simple HTTP server to view the page. (Using python is an easy way to do it)
 ```
-  .\build.bat
-  python -m http.server 3000
+  cargo build --target wasm32-unknown-unknown --release
+  copy .\target\wasm32-unknown-unknown\release\minimal_wasm.wasm .\ #Windows
+  python -m http.server 3000 #HTTP server to view the page at http://localhost:3000/
 ```
-The script tries to use the `wasm2wat` utility to convert the .wasm file to a .wat file for debugging purposes, you can remove it from the build script if `wasm2wat` is not present in your system.
 
 ![example.png](/github/example.png)
